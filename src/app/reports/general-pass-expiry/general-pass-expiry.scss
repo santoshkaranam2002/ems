@@ -1,0 +1,18 @@
+.rv-filters { padding: 16px 18px; margin-bottom: 14px; }
+
+.rvf-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr) auto;
+  gap: 13px;
+  align-items: end;
+}
+
+.rvf-btn .btn { width: 100%; }
+
+@media (max-width: 1020px) {
+  .rvf-grid { grid-template-columns: repeat(2, 1fr); }
+  .rvf-btn { grid-column: 1 / -1; }
+}
+@media (max-width: 480px) {
+  .rvf-grid { grid-template-columns: 1fr; }
+}

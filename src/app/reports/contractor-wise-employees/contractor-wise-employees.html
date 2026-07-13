@@ -1,0 +1,108 @@
+<div class="fade-up">
+  <div class="page-head">
+    <div class="ph-titles">
+      <span class="ph-eyebrow">Reports</span>
+      <h2 class="ph-title">Contractor wise Employees</h2>
+      <p class="ph-desc">Set the filters and generate the report, then export it as PDF or Excel</p>
+    </div>
+    <div class="ph-actions">
+      <button class="btn btn-outline">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        Print
+      </button>
+      <button class="btn btn-gold">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Export Excel
+      </button>
+    </div>
+  </div>
+
+  <!-- Filters -->
+  <div class="card rv-filters">
+    <div class="rvf-grid">
+      <div class="field">
+        <label>Contractor</label>
+        <div class="select-wrap"><select class="select"><option *ngFor="let c of contractors">{{ c }}</option></select></div>
+      </div>
+      <div class="field">
+        <label>Location</label>
+        <div class="select-wrap"><select class="select"><option *ngFor="let l of locations">{{ l }}</option></select></div>
+      </div>
+      <div class="field">
+        <label>From Date</label>
+        <input class="input" type="date" />
+      </div>
+      <div class="field">
+        <label>To Date</label>
+        <input class="input" type="date" />
+      </div>
+      <div class="field rvf-btn">
+        <label>&nbsp;</label>
+        <button class="btn btn-primary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          Generate Report
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Summary strip -->
+  <div class="rv-summary">
+    <div class="rvs-chip">
+      <span class="rvs-num">{{ groups.length }}</span>
+      <span class="rvs-lbl">Contractors</span>
+    </div>
+    <div class="rvs-chip">
+      <span class="rvs-num">{{ grandTotal | number }}</span>
+      <span class="rvs-lbl">Total Employees</span>
+    </div>
+    <div class="rvs-chip">
+      <span class="rvs-num green">{{ grandActive | number }}</span>
+      <span class="rvs-lbl">Active Passes</span>
+    </div>
+    <span class="rvs-meta">Generated on 13 Jul 2026, 10:45 AM · All Contractors · All Locations</span>
+  </div>
+
+  <!-- Grouped report -->
+  <div class="card cwe-group" *ngFor="let g of groups">
+    <div class="cwe-head">
+      <span class="avatar-chip">{{ g.name.charAt(0) }}</span>
+      <div class="cwe-info">
+        <span class="cwe-name">{{ g.name }}</span>
+        <span class="cwe-lic">Licence {{ g.licence }}</span>
+      </div>
+      <div class="cwe-stats">
+        <span class="cwe-stat"><b>{{ g.total }}</b> employees</span>
+        <span class="cwe-stat"><b class="green">{{ g.active }}</b> active</span>
+        <span class="pill pill-gold">Showing {{ g.employees.length }} sample</span>
+      </div>
+    </div>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Employee</th>
+            <th>Designation</th>
+            <th>Work Area</th>
+            <th>Pass Expiry</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let e of g.employees; let i = index">
+            <td class="cell-sub">{{ i + 1 }}</td>
+            <td>
+              <div class="cell-main">{{ e.name }}</div>
+              <div class="cell-sub">{{ e.code }}</div>
+            </td>
+            <td>{{ e.designation }}</td>
+            <td>{{ e.workArea }}</td>
+            <td>{{ e.passExpiry }}</td>
+            <td><span class="pill" [ngClass]="statusClass(e.status)">{{ e.status }}</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

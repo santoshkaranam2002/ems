@@ -1,0 +1,53 @@
+<div class="fade-up">
+  <div class="page-head">
+    <div class="ph-titles">
+      <span class="ph-eyebrow">Utilities</span>
+      <h2 class="ph-title">Users</h2>
+      <p class="ph-desc">System users and their access roles</p>
+    </div>
+    <div class="ph-actions">
+      <button class="btn btn-primary">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" width="14" height="14"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        Add User
+      </button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="toolbar">
+      <div class="search-field">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="15" height="15"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" placeholder="Search users..." />
+      </div>
+    </div>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr><th>User</th><th>Username</th><th>Role</th><th>Last Login</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let u of users">
+            <td>
+              <div class="u-cell">
+                <span class="avatar-chip">{{ u.name.charAt(0) }}</span>
+                <span class="cell-main">{{ u.name }}</span>
+              </div>
+            </td>
+            <td>{{ u.username }}</td>
+            <td><span class="pill pill-blue">{{ u.role }}</span></td>
+            <td>{{ u.lastLogin }}</td>
+            <td><span class="pill" [ngClass]="u.status === 'Active' ? 'pill-green' : 'pill-gray'">{{ u.status }}</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="table-foot">
+      <span>Showing 5 of 5 users</span>
+      <div class="pager">
+        <button class="pg-btn">Prev</button>
+        <button class="pg-btn on">1</button>
+        <button class="pg-btn">Next</button>
+      </div>
+    </div>
+  </div>
+</div>
