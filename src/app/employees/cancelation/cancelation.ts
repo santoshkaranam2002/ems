@@ -1,0 +1,169 @@
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { exportCsv, printTable, pillClass } from '../../shared/table-utils';
+
+interface Row { [key: string]: string; }
+
+@Component({
+  selector: 'app-cancelation',
+  standalone: true,
+  imports: [CommonModule, FormsModule],
+  templateUrl: './cancelation.html',
+  styleUrl: './cancelation.scss'
+})
+export class Cancelation {
+  title = 'Pass Cancelation';
+
+  contractors = ['All Contractors', 'SVR Engineering Works', 'Coastal Infra Services', 'Godavari Mech Pvt Ltd', 'Sai Teja Enterprises', 'Vizag Power Solutions'];
+  selContractor = 'All Contractors';
+  searchTerm = '';
+
+  columns = [
+  {
+    key: "code",
+    label: "Emp Code"
+  },
+  {
+    key: "name",
+    label: "Employee"
+  },
+  {
+    key: "contractor",
+    label: "Contractor"
+  },
+  {
+    key: "passExpiry",
+    label: "Pass Expiry"
+  },
+  {
+    key: "status",
+    label: "Status"
+  }
+];
+  popupFields = [
+  {
+    key: "reason",
+    label: "Cancellation Reason",
+    type: "select",
+    options: [
+      "Left organisation",
+      "Contract completed",
+      "Medical grounds",
+      "Disciplinary"
+    ]
+  },
+  {
+    key: "date",
+    label: "Cancellation Date",
+    type: "date"
+  }
+];
+
+  rows: Row[] = [
+  {
+    "code": "EMP-24817",
+    "name": "K. Ramesh Naidu",
+    "contractor": "SVR Engineering Works",
+    "passExpiry": "08 Jan 2027",
+    "status": "Active"
+  },
+  {
+    "code": "EMP-24816",
+    "name": "P. Suresh Kumar",
+    "contractor": "Coastal Infra Services",
+    "passExpiry": "21 Jul 2026",
+    "status": "Expiring"
+  },
+  {
+    "code": "EMP-24815",
+    "name": "M. Lakshmi Devi",
+    "contractor": "Godavari Mech Pvt Ltd",
+    "passExpiry": "02 Dec 2026",
+    "status": "Active"
+  },
+  {
+    "code": "EMP-24814",
+    "name": "B. Venkata Rao",
+    "contractor": "Sai Teja Enterprises",
+    "passExpiry": "15 Jul 2026",
+    "status": "Expiring"
+  },
+  {
+    "code": "EMP-24813",
+    "name": "S. Anil Kumar",
+    "contractor": "SVR Engineering Works",
+    "passExpiry": "30 Jun 2027",
+    "status": "Active"
+  },
+  {
+    "code": "EMP-24812",
+    "name": "G. Padma Priya",
+    "contractor": "Vizag Power Solutions",
+    "passExpiry": "11 May 2027",
+    "status": "Active"
+  },
+  {
+    "code": "EMP-24390",
+    "name": "D. Krishna Murthy",
+    "contractor": "Godavari Mech Pvt Ltd",
+    "passExpiry": "27 Jul 2026",
+    "status": "Expiring"
+  },
+  {
+    "code": "EMP-23871",
+    "name": "T. Nagaraju",
+    "contractor": "SVR Engineering Works",
+    "passExpiry": "01 Aug 2026",
+    "status": "Active"
+  }
+];
+
+  page = 1;
+  pageSize = 5;
+
+  get filtered(): Row[] {
+    let list = this.rows;
+    if (this.selContractor !== 'All Contractors') list = list.filter(r => r['contractor'] === this.selContractor);
+    const t = this.searchTerm.trim().toLowerCase();
+    if (t) list = list.filter(r => Object.values(r).some(v => String(v).toLowerCase().includes(t)));
+    return list;
+  }
+  get totalPages(): number { return Math.max(1, Math.ceil(this.filtered.length / this.pageSize)); }
+  get pages(): number[] { return Array.from({ length: this.totalPages }, (_, i) => i + 1); }
+  get paged(): Row[] {
+    const p = Math.min(this.page, this.totalPages);
+    return this.filtered.slice((p - 1) * this.pageSize, p * this.pageSize);
+  }
+  onSearch() { this.page = 1; }
+  setPage(p: number) { if (p >= 1 && p <= this.totalPages) this.page = p; }
+
+  pill = pillClass;
+  isDisabled(r: Row): boolean { return r['status'] === 'Cancelled'; }
+
+  // ── action popup ──
+  showModal = false;
+  target: Row | null = null;
+  form: Row = {};
+
+  openAction(row: Row) {
+    this.target = row;
+    this.form = {};
+    for (const f of this.popupFields) this.form[f.key] = f.type === 'select' ? (f.options?.[0] ?? '') : '';
+    this.showModal = true;
+  }
+  closeModal() { this.showModal = false; this.target = null; }
+
+  confirmAction() {
+    if (!this.target) return;
+    this.target['status'] = 'Cancelled';
+    this.showModal = false;
+    this.target = null;
+  }
+
+  private matrix(): string[][] {
+    return this.filtered.map(r => this.columns.map(c => r[c.key] ?? ''));
+  }
+  doExport() { exportCsv(this.title, this.columns.map(c => c.label), this.matrix()); }
+  doPrint() { printTable(this.title, this.columns.map(c => c.label), this.matrix()); }
+}
