@@ -1,92 +1,14 @@
 <div class="login-page">
+  <div class="login-card fade-up">
 
-  <!-- ═══════ LEFT BRAND PANEL ═══════ -->
-  <div class="brand-panel">
-    <div class="bp-glow bp-glow-1"></div>
-    <div class="bp-glow bp-glow-2"></div>
-    <div class="bp-grid"></div>
-
-    <div class="bp-top">
-      <div class="bp-logo">
-        <div class="bp-logo-mark">
-          <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
-            <path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/>
-          </svg>
-        </div>
-        <div class="bp-logo-txt">
-          <span class="bp-logo-name">HNPCL <b>EMS</b></span>
-          <span class="bp-logo-sub">Hinduja National Power Corporation Ltd.</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="bp-middle">
-      <span class="bp-eyebrow">Contract Employees Management System</span>
-      <h1 class="bp-headline">
-        One secure gateway for your <em>entire contract workforce.</em>
-      </h1>
-      <p class="bp-sub">
-        Registrations, renewals, gate passes, wages and reports —
-        managed end-to-end from a single modern console.
-      </p>
-
-      <div class="bp-features">
-        <div class="bp-feature">
-          <div class="bpf-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="17" height="17">
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/>
-            </svg>
-          </div>
-          <div>
-            <div class="bpf-title">Secure Pass Control</div>
-            <div class="bpf-desc">General &amp; group passes with expiry tracking</div>
-          </div>
-        </div>
-        <div class="bp-feature">
-          <div class="bpf-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="17" height="17">
-              <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/>
-              <path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/>
-            </svg>
-          </div>
-          <div>
-            <div class="bpf-title">Contractor-wise Workforce</div>
-            <div class="bpf-desc">Every employee mapped to contractor &amp; work order</div>
-          </div>
-        </div>
-        <div class="bp-feature">
-          <div class="bpf-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="17" height="17">
-              <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
-              <polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>
-            </svg>
-          </div>
-          <div>
-            <div class="bpf-title">15+ Statutory Reports</div>
-            <div class="bpf-desc">Form 6A, PF, safety training &amp; more — one click</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="bp-bottom">
-      <span class="bp-plant-dot"></span> Vizag Thermal Power Plant &middot; 2 × 520 MW
-    </div>
-  </div>
-
-  <!-- ═══════ RIGHT SIGN-IN PANEL ═══════ -->
-  <div class="signin-panel">
-    <div class="signin-inner fade-up">
-
-      <div class="si-badge">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="13" height="13">
-          <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/>
-        </svg>
-        Authorised access only
+    <!-- ═══════ LEFT: LOGIN FORM ═══════ -->
+    <div class="lc-form">
+      <div class="lc-brand">
+        <span class="lc-brand-name">HNPCL <b>EMS</b></span>
+        <span class="lc-brand-sub">Hinduja National Power Corporation Ltd.</span>
       </div>
 
-      <h2 class="si-title">Welcome back</h2>
-      <p class="si-sub">Sign in to continue to the EMS console</p>
+  
 
       <form class="si-form" (ngSubmit)="onSubmit()" #loginForm="ngForm">
 
@@ -173,6 +95,26 @@
 
       <p class="si-footer">© {{ year }} HNPCL &middot; Contract Employees Management System &middot; v2.0</p>
     </div>
-  </div>
 
+    <!-- ═══════ RIGHT: FULL PLANT IMAGE + OVERLAY CAPTION ═══════ -->
+    <div class="lc-visual">
+      <div class="lc-image">
+        <img src="hnpcl-plant.png" alt="Vizag Thermal Power Plant, HNPCL" />
+      </div>
+
+      <!-- <div class="lc-caption">
+        <span class="bp-eyebrow">Contract Employees Management System</span>
+        <h3 class="lc-caption-title">Powering secure workforce management</h3>
+        <p class="lc-caption-desc">
+          Registrations, gate passes, wages and statutory reports —
+          managed end-to-end from a single console.
+        </p>
+
+        <div class="lc-status">
+          <span class="bp-plant-dot"></span> Vizag Thermal Power Plant &middot; 2 × 520 MW
+        </div>
+      </div> -->
+    </div>
+
+  </div>
 </div>

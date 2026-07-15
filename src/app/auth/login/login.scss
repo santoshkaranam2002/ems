@@ -1,222 +1,141 @@
 // ═══════════════════════════════════════════════
-//  LOGIN — HNPCL EMS
+//  LOGIN — HNPCL EMS  (FINAL)
+//  Image LEFT · floating form card RIGHT · responsive
 // ═══════════════════════════════════════════════
 
 .login-page {
   min-height: 100vh;
-  display: grid;
-  grid-template-columns: minmax(420px, 46%) 1fr;
-  background: #fff;
-}
-
-// ─────────── LEFT: BRAND PANEL ───────────
-.brand-panel {
-  position: relative;
-  overflow: hidden;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 34px 44px;
-  color: #fff;
-  background:
-    radial-gradient(120% 90% at 85% -10%, hsl(var(--primary-h), 66%, 44%) 0%, transparent 55%),
-    linear-gradient(160deg, hsl(var(--primary-h), 62%, 30%) 0%, hsl(var(--primary-h), 60%, 20%) 55%, hsl(var(--primary-h), 58%, 13%) 100%);
+  align-items: stretch;
+  justify-content: center;
+  padding: 0;
+  background: #f4f6f9;
 }
 
-.bp-glow {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(70px);
-  opacity: 0.5;
-  pointer-events: none;
-}
-.bp-glow-1 {
-  width: 380px; height: 380px;
-  background: radial-gradient(circle, rgba(217, 164, 65, 0.55), transparent 70%);
-  bottom: -120px; right: -90px;
-}
-.bp-glow-2 {
-  width: 300px; height: 300px;
-  background: radial-gradient(circle, hsl(var(--primary-h), 80%, 55%), transparent 70%);
-  top: -80px; left: -60px;
-  opacity: 0.4;
+.login-card {
+  width: 100%;
+  max-width: 100%;
+  min-height: 100vh;
+  background: #eef1f6;               // backdrop so the form card stands out
+  border-radius: 0;
+  box-shadow: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  overflow: hidden;
 }
 
-.bp-grid {
+// ─────────── LEFT: IMAGE PANEL (blur backdrop + sharp photo) ───────────
+.lc-visual {
+  order: 1;
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.lc-image {
   position: absolute;
   inset: 0;
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
-  background-size: 42px 42px;
-  mask-image: radial-gradient(80% 70% at 40% 40%, #000 30%, transparent 100%);
-  pointer-events: none;
-}
-
-.bp-top { position: relative; z-index: 1; }
-
-.bp-logo { display: flex; align-items: center; gap: 12px; }
-
-.bp-logo-mark {
-  width: 44px;
-  height: 44px;
-  border-radius: 13px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--gold);
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  backdrop-filter: blur(6px);
-  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.28);
+
+  // blurred copy of the SAME photo fills the whole panel
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -30px;
+    background: url('/hnpcl-plant.png') center / cover no-repeat;
+    filter: blur(22px) brightness(0.82);
+  }
+
+  // sharp full photo on top — logo & name fully visible
+  img {
+    position: relative;
+    z-index: 1;
+    width: 94%;
+    height: auto;
+    max-height: 92%;
+    object-fit: contain;
+    display: block;
+    border-radius: 14px;
+    box-shadow: 0 26px 70px rgba(0, 0, 0, 0.5);
+  }
+
+  &::after { content: none; }
 }
 
-.bp-logo-txt { display: flex; flex-direction: column; line-height: 1.2; }
-.bp-logo-name {
-  font-size: 17px;
-  font-weight: 500;
+.lc-caption { display: none; }
+
+// ─────────── RIGHT: FLOATING FORM CARD ───────────
+.lc-form {
+  order: 2;
+  margin: auto;                      // centers card in the right half
+  width: min(520px, 88%);
+  padding: 40px 38px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #fff;
+  border: 1px solid var(--border-strong);
+  border-radius: 20px;
+  box-shadow:
+    0 30px 70px rgba(22, 32, 46, 0.25),
+    0 12px 28px rgba(22, 32, 46, 0.15),
+    0 2px 8px rgba(22, 32, 46, 0.08);
+}
+
+// all form pieces share one neat column
+.si-title,
+.si-sub,
+.si-form,
+.si-note,
+.si-footer {
+  width: 100%;
+  max-width: 440px;
+}
+
+// ── brand (centered, bigger) ──
+.lc-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  line-height: 1.3;
+  margin-bottom: 24px;
+}
+.lc-brand-name {
+  font-size: 22px;
+  font-weight: 600;
   letter-spacing: 0.03em;
-  b { font-weight: 800; color: var(--gold); }
+  color: var(--text-primary);
+  b { font-weight: 800; color: var(--primary-color); }
 }
-.bp-logo-sub {
-  font-size: 10.5px;
+.lc-brand-sub {
+  font-size: 12.5px;
   font-weight: 600;
-  letter-spacing: 0.06em;
-  color: rgba(255, 255, 255, 0.62);
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
 }
 
-.bp-middle { position: relative; z-index: 1; max-width: 460px; }
-
-.bp-eyebrow {
-  display: inline-block;
-  font-size: 10.5px;
+.si-title {
+  font-size: 26px;
   font-weight: 800;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--gold);
-  padding: 5px 13px;
-  border-radius: 99px;
-  background: rgba(217, 164, 65, 0.12);
-  border: 1px solid rgba(217, 164, 65, 0.3);
-  margin-bottom: 18px;
+  letter-spacing: -0.02em;
+  margin-bottom: 5px;
+  text-align: center;
 }
-
-.bp-headline {
-  font-size: clamp(24px, 2.6vw, 33px);
-  font-weight: 800;
-  line-height: 1.22;
-  letter-spacing: -0.015em;
-  margin-bottom: 13px;
-
-  em {
-    font-style: normal;
-    background: linear-gradient(90deg, #f4d27f, var(--gold));
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-}
-
-.bp-sub {
+.si-sub {
   font-size: 13.5px;
-  line-height: 1.65;
-  color: rgba(255, 255, 255, 0.72);
-  margin-bottom: 30px;
+  color: var(--text-secondary);
+  margin-bottom: 26px;
+  text-align: center;
 }
 
-.bp-features { display: flex; flex-direction: column; gap: 13px; }
-
-.bp-feature {
+.si-form {
   display: flex;
-  align-items: center;
-  gap: 13px;
-  padding: 12px 15px;
-  border-radius: 14px;
-  background: rgba(255, 255, 255, 0.055);
-  border: 1px solid rgba(255, 255, 255, 0.09);
-  backdrop-filter: blur(6px);
-  transition: var(--transition);
-
-  &:hover {
-    background: rgba(255, 255, 255, 0.1);
-    transform: translateX(4px);
-  }
+  flex-direction: column;
+  gap: 15px;
 }
-
-.bpf-icon {
-  width: 36px;
-  height: 36px;
-  border-radius: 11px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--gold);
-  background: rgba(217, 164, 65, 0.13);
-  border: 1px solid rgba(217, 164, 65, 0.25);
-  flex-shrink: 0;
-}
-
-.bpf-title { font-size: 13px; font-weight: 700; }
-.bpf-desc { font-size: 11.5px; color: rgba(255, 255, 255, 0.6); }
-
-.bp-bottom {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 11.5px;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.55);
-}
-
-.bp-plant-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #4ade80;
-  box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.2);
-  animation: pulse 2.2s infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.2); }
-  50%      { box-shadow: 0 0 0 6px rgba(74, 222, 128, 0.08); }
-}
-
-// ─────────── RIGHT: SIGN-IN PANEL ───────────
-.signin-panel {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 40px 24px;
-  background:
-    radial-gradient(60% 50% at 100% 0%, var(--primary-light) 0%, transparent 60%),
-    #fdfcfb;
-}
-
-.signin-inner { width: 100%; max-width: 390px; }
-
-.si-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  font-size: 10.5px;
-  font-weight: 800;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--primary-color);
-  background: var(--primary-light);
-  border: 1px solid var(--primary-soft);
-  padding: 5px 13px;
-  border-radius: 99px;
-  margin-bottom: 20px;
-}
-
-.si-title { font-size: 26px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 5px; }
-.si-sub { font-size: 13.5px; color: var(--text-secondary); margin-bottom: 26px; }
-
-.si-form { display: flex; flex-direction: column; gap: 15px; }
 
 .si-field {
   display: flex;
@@ -252,7 +171,7 @@
     font-size: 13.5px;
     font-family: inherit;
     color: var(--text-primary);
-    background: #fff;
+    background: var(--bg-input);
     border: 1.5px solid var(--border-strong);
     border-radius: 12px;
     outline: none;
@@ -261,6 +180,7 @@
     &::placeholder { color: var(--text-muted); }
 
     &:focus {
+      background: #fff;
       border-color: var(--primary-mid);
       box-shadow: 0 0 0 4px rgba(var(--primary-rgb), 0.1);
     }
@@ -430,25 +350,77 @@
   color: var(--text-muted);
 }
 
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-up { animation: fadeUp 0.4s ease both; }
+
 // ─────────── RESPONSIVE ───────────
-@media (max-width: 980px) {
-  .login-page { grid-template-columns: 1fr; }
-
-  .brand-panel {
-    min-height: unset;
-    padding: 24px 22px;
-    gap: 18px;
-
-    .bp-middle { max-width: 100%; }
-    .bp-headline { font-size: 21px; margin-bottom: 8px; }
-    .bp-sub { margin-bottom: 0; }
-    .bp-features, .bp-bottom { display: none; }
+@media (max-width: 780px) {
+  .login-page {
+    min-height: 100dvh;
+    background: #eef1f6;
   }
 
-  .signin-panel { padding: 30px 18px 40px; }
+  .login-card {
+    grid-template-columns: 1fr;
+    min-height: 100dvh;
+    grid-template-rows: auto 1fr;
+    background: transparent;
+  }
+
+  // image banner — full width, compact
+  .lc-visual { min-height: 190px; }
+
+  .lc-image {
+    &::before { filter: blur(16px) brightness(0.8); }
+
+    img {
+      width: auto;
+      max-width: 92%;
+      max-height: 86%;
+      border-radius: 10px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+    }
+  }
+
+  // form card — border + shadow, fits without scroll
+  .lc-form {
+    margin: 16px 14px;
+    width: auto;
+    padding: 24px 20px 26px;
+    box-shadow:
+      0 24px 55px rgba(22, 32, 46, 0.22),
+      0 8px 20px rgba(22, 32, 46, 0.12);
+  }
+
+  .lc-brand { margin-bottom: 14px; }
+  .lc-brand-name { font-size: 19px; }
+  .lc-brand-sub { font-size: 11.5px; }
+
+  .si-title { font-size: 21px; }
+  .si-sub { margin-bottom: 14px; font-size: 12.5px; }
+
+  .si-form { gap: 11px; }
+
+  .si-input-wrap input { min-height: 44px; padding: 11px 44px 11px 38px; }
+  .si-submit { min-height: 46px; }
+
+  .si-divider { margin-top: 2px; }
+  .si-note { font-size: 10.5px; line-height: 1.5; }
+  .si-footer { margin-top: 12px; font-size: 10px; }
 }
 
 @media (max-width: 420px) {
-  .si-title { font-size: 22px; }
-  .signin-inner { max-width: 100%; }
+  .lc-visual { min-height: 165px; }
+  .lc-form { margin: 12px 10px; padding: 20px 16px 22px; }
+  .lc-brand-name { font-size: 18px; }
+  .si-title { font-size: 19px; }
+}
+
+// short landscape phones — hide image, form card only
+@media (max-width: 900px) and (max-height: 480px) {
+  .lc-visual { display: none; }
+  .login-card { grid-template-rows: 1fr; }
 }

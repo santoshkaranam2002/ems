@@ -1,53 +1,59 @@
 // ════════════════════════════════════════════════════════════════
 //  HNPCL EMS — GLOBAL STYLES (Centralized Theme)
+//  Retheme rebased on the HNPCL logo:
+//    • Primary  = deep navy blue (the "HN" letters)
+//    • Gold     = sun rays (secondary/accent)
+//    • Red      = lightning bolt (alerts / danger / highlight accent)
 //  Change --primary-h / s / l below to retheme the ENTIRE app.
 // ════════════════════════════════════════════════════════════════
 
 // ── THEME VARIABLES ──────────────────────────────────────────────
 :root {
-  // Primary brand — deep HNPCL crimson
-  --primary-h: 349;
-  --primary-s: 64%;
-  --primary-l: 33%;
+  // Primary brand — HNPCL navy blue (from the "HN" wordmark)
+  --primary-h: 221;
+  --primary-s: 65%;
+  --primary-l: 32%;
   --primary-color: hsl(var(--primary-h), var(--primary-s), var(--primary-l));
   --primary-light: hsl(var(--primary-h), var(--primary-s), 96%);
   --primary-soft: hsl(var(--primary-h), var(--primary-s), 92%);
-  --primary-mid: hsl(var(--primary-h), var(--primary-s), 48%);
-  --primary-dark: hsl(var(--primary-h), var(--primary-s), 24%);
-  --primary-deep: hsl(var(--primary-h), 58%, 16%);
-  --primary-rgb: 138, 30, 50;
+  --primary-mid: hsl(var(--primary-h), var(--primary-s), 46%);
+  --primary-dark: hsl(var(--primary-h), var(--primary-s), 22%);
+  --primary-deep: hsl(var(--primary-h), 58%, 14%);
+  --primary-rgb: 29, 62, 135;
 
-  // Gold accent (secondary brand)
-  --gold: #d9a441;
-  --gold-soft: #faf3e3;
-  --gold-dark: #b8862e;
+  // Gold accent (sun rays — secondary brand)
+  --gold: #f0a83c;
+  --gold-soft: #fdf1de;
+  --gold-dark: #c97f1f;
 
   // Status accents
   --accent-green: #16a34a;
   --accent-green-soft: #ecfdf3;
-  --accent-blue: #2563eb;
+  --accent-blue: #2f6fed;
   --accent-blue-soft: #eff4ff;
   --accent-orange: #ea8a0c;
   --accent-orange-soft: #fef4e6;
   --accent-purple: #7c3aed;
   --accent-purple-soft: #f4efff;
-  --accent-red: #dc2626;
-  --accent-red-soft: #fdeeee;
+
+  // Red (lightning bolt — used for danger/alerts + brand highlight)
+  --accent-red: #e2233f;
+  --accent-red-soft: #fdeaee;
 
   // Neutrals
-  --bg-app: #f6f4f2;
+  --bg-app: #f5f6f8;
   --bg-card: #ffffff;
   --bg-sidebar: #ffffff;
   --bg-header: rgba(255, 255, 255, 0.88);
-  --bg-input: #faf9f8;
+  --bg-input: #f8f9fb;
 
-  --text-primary: #221a1c;
-  --text-secondary: #6d6468;
-  --text-muted: #a29a9e;
+  --text-primary: #1a1d24;
+  --text-secondary: #656c78;
+  --text-muted: #9aa1ac;
   --text-on-primary: #ffffff;
 
-  --border-color: #e9e4e2;
-  --border-strong: #d9d2cf;
+  --border-color: #e6e8ec;
+  --border-strong: #d5d9e0;
   --border-radius: 14px;
   --border-radius-sm: 9px;
 
@@ -56,9 +62,9 @@
   --header-height: 62px;
 
   // Shadows
-  --shadow-sm: 0 1px 3px rgba(34, 26, 28, 0.05), 0 1px 2px rgba(34, 26, 28, 0.04);
-  --shadow-md: 0 4px 14px rgba(34, 26, 28, 0.08), 0 2px 4px rgba(34, 26, 28, 0.04);
-  --shadow-lg: 0 14px 40px rgba(34, 26, 28, 0.14);
+  --shadow-sm: 0 1px 3px rgba(26, 29, 36, 0.05), 0 1px 2px rgba(26, 29, 36, 0.04);
+  --shadow-md: 0 4px 14px rgba(26, 29, 36, 0.08), 0 2px 4px rgba(26, 29, 36, 0.04);
+  --shadow-lg: 0 14px 40px rgba(26, 29, 36, 0.14);
   --shadow-primary: 0 8px 24px rgba(var(--primary-rgb), 0.32);
 
   --transition: 0.22s cubic-bezier(0.4, 0, 0.2, 1);
@@ -158,9 +164,9 @@ button { font-family: inherit; }
     &:active { transform: translateY(0); }
   }
   &-gold {
-    background: linear-gradient(135deg, #e7b95c, var(--gold-dark));
+    background: linear-gradient(135deg, #f4c169, var(--gold-dark));
     color: #3a2604;
-    &:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(217, 164, 65, 0.4); }
+    &:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(240, 168, 60, 0.4); }
   }
   &-outline {
     background: var(--bg-card);
@@ -176,7 +182,7 @@ button { font-family: inherit; }
   &-danger-soft {
     background: var(--accent-red-soft);
     color: var(--accent-red);
-    &:hover { background: #fbdcdc; }
+    &:hover { background: #fbd6dc; }
   }
 }
 
@@ -529,8 +535,8 @@ button { font-family: inherit; }
   border: 1px solid var(--border-strong);
   border-radius: 16px;
   box-shadow:
-    0 24px 70px rgba(34, 26, 28, 0.28),
-    0 6px 20px rgba(34, 26, 28, 0.14);
+    0 24px 70px rgba(26, 29, 36, 0.28),
+    0 6px 20px rgba(26, 29, 36, 0.14);
   animation: fadeUp 0.22s ease both;
 }
 .modal-head {
